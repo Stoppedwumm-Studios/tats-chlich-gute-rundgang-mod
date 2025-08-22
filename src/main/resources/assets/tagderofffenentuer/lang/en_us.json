@@ -1,0 +1,13 @@
+{
+  "itemGroup.tagderofffenentuer": "Example Mod Tab",
+  "block.tagderofffenentuer.example_block": "Example Block",
+  "item.tagderofffenentuer.example_item": "Example Item",
+
+  "tagderofffenentuer.configuration.title": "tag-der-offfenen-tür Configs",
+  "tagderofffenentuer.configuration.section.tagderofffenentuer.common.toml": "tag-der-offfenen-tür Configs",
+  "tagderofffenentuer.configuration.section.tagderofffenentuer.common.toml.title": "tag-der-offfenen-tür Configs",
+  "tagderofffenentuer.configuration.items": "Item List",
+  "tagderofffenentuer.configuration.logDirtBlock": "Log Dirt Block",
+  "tagderofffenentuer.configuration.magicNumberIntroduction": "Magic Number Text",
+  "tagderofffenentuer.configuration.magicNumber": "Magic Number"
+}
