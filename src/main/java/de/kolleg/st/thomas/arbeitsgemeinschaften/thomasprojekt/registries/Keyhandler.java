@@ -17,7 +17,7 @@ public class Keyhandler {
     public static void onClientTick(ClientTickEvent.Post event) {
         // check key presses
         if (Keybind.OPEN_BROWSER.consumeClick()) {
-            Minecraft.getInstance().setScreen(new BasicBrowser(Component.literal("test")));
+            Minecraft.getInstance().setScreen(new BasicBrowser("https://adventure.kst-vechta.de/"));
         }
     }
 }

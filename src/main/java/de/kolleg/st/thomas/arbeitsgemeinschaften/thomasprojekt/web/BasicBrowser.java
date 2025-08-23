@@ -37,16 +37,18 @@ public class BasicBrowser extends Screen {
     private static final int BROWSER_DRAW_OFFSET = 20;
 
     private MCEFBrowser browser;
+    private final String url;
 
-    public BasicBrowser(Component component) {
-        super(component);
+    public BasicBrowser(String url) {
+        super(Component.literal("Basic Browser"));
+        this.url = url;
     }
 
     @Override
     protected void init() {
         super.init();
         if (browser == null) {
-            String url = "https://hallo.kst-vechta.de/";
+            String url = this.url;
             boolean transparent = true;
             browser = MCEF.createBrowser(url, transparent);
             resizeBrowser();
