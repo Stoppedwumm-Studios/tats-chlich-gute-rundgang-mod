@@ -1,6 +1,7 @@
 package de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.blocks.categories;
 
 import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.blocks.coreblocks.FacingBlock;
+import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.blocks.decorations.SchultaschenRegal;
 import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.registries.Blocks;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -16,11 +17,11 @@ public class BuildingBlocks {
 
     public static void register() {
         SCHULTASCHENREGAL = registerBlock("schultaschen_regal",
-                () -> new FacingBlock(BlockBehaviour.Properties.of()
+                () -> new SchultaschenRegal(BlockBehaviour.Properties.of()
                         .destroyTime(-1.0F)
                         .explosionResistance(99999999999.99f)
                         .sound(SoundType.WOOD)
-                        .lightLevel(state -> 7)
+                        .lightLevel(state -> 0)
                         .noOcclusion()
                 ));
     }

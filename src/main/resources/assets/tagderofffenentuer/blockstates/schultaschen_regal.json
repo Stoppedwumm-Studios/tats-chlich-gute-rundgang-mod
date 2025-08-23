@@ -1,8 +1,12 @@
 {
   "variants": {
-    "facing=north": {"model": "tagderofffenentuer:block/schultaschen_regal"},
-    "facing=south": {"model": "tagderofffenentuer:block/schultaschen_regal", "y": 180},
-    "facing=west": {"model": "tagderofffenentuer:block/schultaschen_regal", "y": 270},
-    "facing=east": {"model": "tagderofffenentuer:block/schultaschen_regal", "y": 90}
+    "facing=north,filled=false": {"model": "tagderofffenentuer:block/schultaschen_regal"},
+    "facing=south,filled=false": {"model": "tagderofffenentuer:block/schultaschen_regal", "y": 180},
+    "facing=west,filled=false": {"model": "tagderofffenentuer:block/schultaschen_regal", "y": 270},
+    "facing=east,filled=false": {"model": "tagderofffenentuer:block/schultaschen_regal", "y": 90},
+    "facing=north,filled=true": {"model": "tagderofffenentuer:block/schultaschen_regal_filled"},
+    "facing=south,filled=true": {"model": "tagderofffenentuer:block/schultaschen_regal_filled", "y": 180},
+    "facing=west,filled=true": {"model": "tagderofffenentuer:block/schultaschen_regal_filled", "y": 270},
+    "facing=east,filled=true": {"model": "tagderofffenentuer:block/schultaschen_regal_filled", "y": 90}
   }
 }

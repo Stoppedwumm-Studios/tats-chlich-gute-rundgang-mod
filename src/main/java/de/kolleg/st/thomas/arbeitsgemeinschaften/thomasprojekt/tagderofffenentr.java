@@ -1,60 +1,69 @@
 package de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt;
 
+// --- CHANGED/ADDED IMPORTS ---
+import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.entities.npc.BaseNPC;
+import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.entities.renderer.GenericNPCRenderer; // Use the new generic renderer
 import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.registries.Blocks;
+import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.registries.Entities;
+import net.minecraft.resources.ResourceLocation; // Needed for textures
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(tagderofffenentr.MODID)
 public class tagderofffenentr {
-    // Define mod id in a common place for everything to reference
     public static final String MODID = "tagderofffenentuer";
-    // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public tagderofffenentr(IEventBus modEventBus, ModContainer modContainer) {
         NeoForge.EVENT_BUS.register(this);
 
         Blocks.register(modEventBus);
+        Entities.register(modEventBus); // <-- CHANGED from Entities to ModEntities
 
         LOGGER.info("Registered Blocks and Items");
-
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+        modEventBus.addListener(this::onEntityAttributeCreation);
+        modEventBus.addListener(this::onRegisterRenderers);
     }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+        // ...
+    }
 
+    // --- UPDATED METHOD ---
+    public void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
+        // Now we register attributes for every NPC defined in ModEntities.
+        // They all share the same attributes from BaseNPC.
+        event.put(Entities.BT_NPC.get(), BaseNPC.createAttributes().build());
+        // Add a line here for any new NPC, for example:
+        event.put(Entities.TEACHER_NPC.get(), BaseNPC.createAttributes().build());
+    }
+
+    // --- UPDATED METHOD ---
+    private void onRegisterRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+        // Define the textures for each NPC
+        ResourceLocation btTexture = ResourceLocation.fromNamespaceAndPath(MODID, "textures/entity/bt.png");
+        ResourceLocation teacherTexture = ResourceLocation.fromNamespaceAndPath(MODID, "textures/entity/teacher.png");
+
+        // Register a renderer for our BT NPC, telling it which texture to use
+        event.registerEntityRenderer(Entities.BT_NPC.get(),
+                context -> new GenericNPCRenderer(context, btTexture));
+
+        // Register a renderer for the Teacher NPC example
+        event.registerEntityRenderer(Entities.TEACHER_NPC.get(),
+                 context -> new GenericNPCRenderer(context, teacherTexture));
     }
 }
