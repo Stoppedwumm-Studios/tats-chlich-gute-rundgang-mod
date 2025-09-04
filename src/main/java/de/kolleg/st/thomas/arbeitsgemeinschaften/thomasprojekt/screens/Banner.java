@@ -1,6 +1,7 @@
 package de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.screens;
 
 import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.tagderofffenentr;
+import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.modstorage.QuestStorage;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -18,13 +19,13 @@ public class Banner {
     @SubscribeEvent
     public static void renderBanner(RenderGuiLayerEvent.Post event) {
         // We will render after the boss bar layer to ensure our banner is on top
-        if (event.getName().equals(VanillaGuiLayers.BOSS_OVERLAY)) {
+        if (event.getName().equals(VanillaGuiLayers.BOSS_OVERLAY) && QuestStorage.questRunning) {
             Minecraft minecraft = Minecraft.getInstance();
             GuiGraphics guiGraphics = event.getGuiGraphics();
             Font font = minecraft.font;
             
             // Your custom text
-            Component bannerText = Component.literal("This is a text banner!");
+            Component bannerText = Component.literal(QuestStorage.currentBannerTextString);
 
             int screenWidth = minecraft.getWindow().getGuiScaledWidth();
             int screenHeight = minecraft.getWindow().getGuiScaledHeight();

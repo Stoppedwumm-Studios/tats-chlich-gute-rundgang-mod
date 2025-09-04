@@ -1,5 +1,6 @@
 package de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.entities.npc;
 
+import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.modstorage.QuestStorage;
 import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.web.BasicBrowser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -71,6 +72,13 @@ public class BaseNPC extends PathfinderMob {
             // You can expand this logic with 'instanceof' checks for different NPC types.
             if (this instanceof BTEntity) {
                 Minecraft.getInstance().setScreen(new BasicBrowser("https://hallo.kst-vechta.de"));
+            }
+
+            if (this instanceof TeacherEntity) {
+                player.sendSystemMessage(Component.literal("<Herr xyz> Hallo, ich bin ein Lehrer!"));
+                player.sendSystemMessage(Component.literal("<Herr xyz> Finde heraus, was ich unterrichte!"));
+                QuestStorage.currentBannerTextString = "Finde heraus, was xyz unterrichtet!";
+                QuestStorage.questRunning = true;
             }
         }
         // Return SUCCESS to confirm the interaction was handled.
