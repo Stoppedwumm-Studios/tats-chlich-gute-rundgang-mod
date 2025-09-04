@@ -4,6 +4,7 @@ package de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt;
 import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.entities.npc.BaseNPC;
 import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.entities.renderer.GenericNPCRenderer; // Use the new generic renderer
 import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.registries.Blocks;
+import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.registries.DataAttachments;
 import de.kolleg.st.thomas.arbeitsgemeinschaften.thomasprojekt.registries.Entities;
 import net.minecraft.resources.ResourceLocation; // Needed for textures
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -30,6 +31,7 @@ public class tagderofffenentr {
 
         Blocks.register(modEventBus);
         Entities.register(modEventBus); // <-- CHANGED from Entities to ModEntities
+        DataAttachments.register(modEventBus);
 
         LOGGER.info("Registered Blocks and Items");
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
